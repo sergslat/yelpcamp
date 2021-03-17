@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate')  %> 
+<body>
+    <h1 class="text-center">New Campground</h1>
+
+    <div class="col-6 offset-3" >
+        <form action="/campgrounds" method="POST" novalidate class="validated-form">
+            <label class="form-label" for="Title"></label>
+            <input class="form-control mb-3" type="text" name="title" placeholder="Campground Title" required > 
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price" placeholder="Price" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text">.00</span>
+                </div>
+              </div>
+            <!-- <label class="form-label" for="Price"></label>
+            <input class="form-control" type="number" name="price" placeholder="Price"> -->
+            <label class="form-label" for="description"></label>
+            <input class="form-control" type="text" name="description" placeholder="Campground description" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <label class="form-label" for="Location"></label>
+            <input class="form-control mb-3" type="text" name="location" placeholder="Location" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <label class="form-label" for="image"></label>
+            <input class="form-control mb-3" type="text" name="image" placeholder="Image URL" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <button class="btn btn-danger">Submit</button>
+        
+        </form>
+    </div>
+</body>
+
+
+                

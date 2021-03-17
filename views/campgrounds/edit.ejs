@@ -1,0 +1,40 @@
+<% layout('layouts/boilerplate')  %> 
+<body>
+    <h1 class="text-center">Edit Campground</h1>
+
+    <div class="col-6 offset-3">
+
+        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate class="validated-form">
+            <label for="Title"></label>
+            <input class="form-control mb-3"class="form-control mb-3"  type="text" name="title" placeholder="Campground Title" value="<%=campground.title%>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <label for="Price"></label>
+            <input class="form-control mb-3" type="text" name="price" placeholder="Price" value="<%=campground.price%>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <label for="description"></label>
+            <input class="form-control mb-3" type="text" name="description" placeholder="Campground desc" value="<%=campground.description%>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <label for="Location"></label>
+            <input class="form-control mb-3" type="text" name="location" placeholder="Location" value="<%=campground.location%>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <label for="Image"></label>
+            <input class="form-control mb-3" type="text" name="image" placeholder="Image" value="<%=campground.image%>" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Update Campground</button>
+            </div>
+        
+        </form>
+        <a href="/campgrounds/<%= campground._id %> ">Back to campground</a>
+    </div>
+</body>
