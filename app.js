@@ -3,6 +3,10 @@ const app=express();
 const path= require('path');
 
 const mongoose = require('mongoose');
+const passport = require ('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
+
 
 const ejsMate= require ('ejs-mate');
 app.engine('ejs', ejsMate)
@@ -45,6 +49,7 @@ app.use(session(sessionConfig));
 
 const campgrounds = require('./routes/campgrounds')
 const reviews = require('./routes/reviews')
+const usersRoutes = require('./routes/usersRoutes')
 
 
 const port=3000;
@@ -59,14 +64,29 @@ app.use((req,res,next) =>{
     next();
 })
 
+
+//Passport
+app.use (passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
+
 //Route handlers
 app.use('/campgrounds',campgrounds)
 app.use('/campgrounds/:id/reviews',reviews)
+app.use('/',usersRoutes)
 
 app.get('/', (req,res) =>{ //Basic Routing to '/' home page
 
     res.render('home');
 }) 
+
+app.get('/', )
 
 
 
