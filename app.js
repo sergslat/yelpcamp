@@ -1,7 +1,7 @@
 const express= require('express');
 const app=express();
 const path= require('path');
-
+const ExpressError=require('./utils/ExpressError')
 const mongoose = require('mongoose');
 const passport = require ('passport');
 const LocalStrategy = require('passport-local');
@@ -58,11 +58,7 @@ app.set('view engine','ejs');
 app.set('views', path.join(__dirname, 'views')) 
 app.use(express.urlencoded({extended : true}));
 
-app.use((req,res,next) =>{
-    res.locals.success=req.flash('success')
-    res.locals.error=req.flash('error')
-    next();
-})
+
 
 
 //Passport
@@ -72,6 +68,18 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+//Middleware with every request
+app.use((req,res,next) =>{
+    if(!(['/login','/'].includes(req.originalUrl))){
+        req.session.returnTo=req.originalUrl;
+    }
+    // console.log(req.originalUrl)
+    res.locals.success=req.flash('success')
+    res.locals.error=req.flash('error')
+    res.locals.currentUser=req.user;
+    next();
+})
 
 
 
@@ -85,11 +93,6 @@ app.get('/', (req,res) =>{ //Basic Routing to '/' home page
 
     res.render('home');
 }) 
-
-app.get('/', )
-
-
-
 
 app.all ('*', (req,res,next) =>{
     next(new ExpressError('Page Not Found',404));
